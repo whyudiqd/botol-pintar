@@ -441,16 +441,14 @@
         }
 
         // --- Koneksi Real-time (SSE) & Inisialisasi ---
-        // Peringatan: Pastikan sse_server.php berjalan di server Anda
-        const eventSource = new EventSource('sse_server.php'); 
+        const eventSource = new EventSource('sse_server.php');
         eventSource.onmessage = function(event) {
             try {
                 const dataPoint = JSON.parse(event.data);
+                // Bagian ini sekarang hanya fokus update nilai live dan chart, jadi sangat cepat!
                 updateLiveDisplay('ph', parseFloat(dataPoint.ph_value).toFixed(2));
                 updateLiveDisplay('flow', parseFloat(dataPoint.flow_rate).toFixed(2));
                 updateLiveDisplay('total', parseFloat(dataPoint.total_volume).toFixed(2));
-                // Refresh data tabel riwayat (halaman 1) untuk menunjukkan data terbaru
-                dataTypes.forEach(type => fetchHistoryData(type, 1)); 
             } catch (e) {
                 console.error("Gagal parse data SSE:", e, event.data);
             }
@@ -459,6 +457,13 @@
 
         // Fetch data pertama kali untuk inisialisasi chart dan tabel
         dataTypes.forEach(type => fetchHistoryData(type, 1));
+
+        // Tambahkan ini: Refresh tabel riwayat setiap 30 detik secara terpisah
+        setInterval(() => {
+            console.log('Refreshing history tables...');
+            dataTypes.forEach(type => fetchHistoryData(type, 1));
+        }, 30000); // 30000 milidetik = 30 detik
+
 
         // --- INISIALISASI SCROLLREVEAL ---
         const sr = ScrollReveal({

@@ -32,8 +32,8 @@ while (true) {
         break;
     }
 
-    // Beri jeda 1 detik untuk mengurangi beban CPU server
-    sleep(1);
+    // DIUBAH: Beri jeda setengah detik (500,000 mikrodetik) untuk mengurangi beban CPU server
+    usleep(500000);
 }
 
 $stmt->close();
