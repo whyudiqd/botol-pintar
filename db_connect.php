@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
+$servername = "mysql.railway.internal";
 $username = "root"; // Default username XAMPP
-$password = "";     // Default password XAMPP
-$dbname = "monitoring_ph";
+$password = "gGwsOgvwiYdjJwjkRWTzLKAAYcXgolRh";     // Default password XAMPP
+$dbname = "railway";
 
 // Buat koneksi
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,3 +12,5 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 ?>
+
+<!-- mysql://root:gGwsOgvwiYdjJwjkRWTzLKAAYcXgolRh@switchback.proxy.rlwy.net:22513/railway -->
