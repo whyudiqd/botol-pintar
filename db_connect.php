@@ -12,5 +12,3 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 ?>
-
-<!-- mysql://root:gGwsOgvwiYdjJwjkRWTzLKAAYcXgolRh@switchback.proxy.rlwy.net:22513/railway -->
